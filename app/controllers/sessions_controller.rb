@@ -13,9 +13,10 @@ class SessionsController < ApplicationController
 			session[:signed] = true
 			session[:email] = params[:session][:email]
 			session[:name] = user.name
+			session[:userid] = user.id
 			redirect_to '/home'
 		else
-			flash.now[:error] = "Invalid email/password combination."
+			#flash.now[:error] = "Invalid email/password combination."
 			render 'new'
 		end
 	end

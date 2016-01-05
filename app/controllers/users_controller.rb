@@ -19,6 +19,7 @@ class UsersController < ApplicationController
         session[:signed] = true
         session[:email] = @user.email
         session[:name] = @user.name
+        session[:userid] = @user.id
         redirect_to '/home'
       else
         render :action => 'new'
@@ -32,4 +33,6 @@ class UsersController < ApplicationController
   	params.require(:user).permit(:name,:mobile,:email,:gender,:password)
   end
 
+  def show 
+  end
 end

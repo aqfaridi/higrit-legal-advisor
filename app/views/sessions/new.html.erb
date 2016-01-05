@@ -7,21 +7,21 @@
 <div class="panel-intro text-center">
 <h2 class="logo-title">
  
-<span class="logo-icon"><i class="icon icon-search-1 ln-shadow-logo shape-0"></i> </span> Hi<span>Grit </span> </h2>
+<span class="logo-icon"><i class="fa-search fa"></i> </span> Hi<span>Grit </span> </h2>
 </div>
 
 <div class="panel-body">
 <%= form_for(:session, :url => sessions_path) do |f| %>
 <div class="form-group">
 	<%= f.label :email ,class: "control-label" %>
-	<div class="input-icon"> <i class="icon-user fa"></i>
+	<div class="input-icon"> <i class="fa-user fa"></i>
 	<%= f.text_field :email,class: "form-control email",placeholder: "Email" %>
 </div>
 </div>
 <div class="form-group">
 	<%= f.label :password ,class: "control-label" %>
-	<div class="input-icon"> <i class="icon-lock fa"></i>
-	<%= f.text_field :password,class: "form-control",placeholder: "Password" %>
+	<div class="input-icon"> <i class="fa-lock fa"></i>
+	<%= f.password_field :password,class: "form-control",placeholder: "Password" %>
 </div>
 </div>
 <div class="form-group">

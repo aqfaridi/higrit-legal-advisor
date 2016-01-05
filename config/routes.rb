@@ -3,7 +3,15 @@ Rails.application.routes.draw do
   resources :sessions,  :only => [:new, :create, :destroy]
   #get '/signup', to: 'users#new'
 
-  resources :users
+  resources :users,:only => [:new, :create, :destroy,:show]
+
+  
+  resources :posts, :only => [:new,:create,:destroy,:index,:show] do
+    resources :comments, :only => [:new,:create,:destroy]
+  end
+  get '/profile/:id', :to => 'posts#show'
+  get '/ask', :to => 'posts#new'
+  get '/posts', :to => 'posts#index'
   get '/signup',  :to => 'users#new'
   get '/login',  :to => 'sessions#new'
   get 'logout', :to => 'sessions#destroy'

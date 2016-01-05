@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+	has_many :posts
+	has_many :comments
+	has_many :voteposts
+	has_many :votecoms
+
 	EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
  	PHONE_REGEX= /\A[0-9]/i
  	validates :name, :presence => true, :length =>{:in=>2..40}

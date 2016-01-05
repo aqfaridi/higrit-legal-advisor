@@ -1,10 +1,48 @@
+<%= javascript_include_tag '/javascripts/tab.js' %>
+<%= javascript_include_tag '/javascripts/jquery.js'%>
+
+<style>
+.pa{
+width:100%;background:url(/images/blog/3.jpg);
+background-position:center top;
+background-repeat:no-repeat;
+background-size:cover;height:350px;
+}
+.pb{
+width:100%;background:url(/images/blog/2.jpg);
+background-position:center top;
+background-repeat:no-repeat;
+background-size:cover;height:350px;
+}
+.pc{
+width:100%;background:url(/images/blog/1.jpg);
+background-position:center top;
+background-repeat:no-repeat;
+background-size:cover;height:350px;
+}
+.pd{
+width:100%;background:url(/images/blog/4.jpg);
+background-position:center top;
+background-repeat:no-repeat;
+background-size:cover;height:350px;
+}
+</style>
 
 <div class="intro">
 <div class="dtable hw100">
-<div class="dtable-cell hw100">
-<div class="container text-center">
-<h1 class="intro-title animated fadeInDown"> Welcome to HiGrit </h1>
-<p class="sub animateme fittext3 animated fadeIn"> Find local legal services in Minutes </p>
+      <ul class="nav nav-tabs nav-stacked nav-justified " id="mytab" style='background-color:transparent; font-weight:bold;'>
+  <li class="active"><a href="#home" data-toggle="tab">Talk to Advisor</a></li>
+  <li><a href="#profile" data-toggle="tab">Free Answers</a></li>
+  <li><a href="#messages" data-toggle="tab">Packages and Services</a></li>
+  <li><a href="#user" data-toggle="tab">BOOK APPOINTMENT</a></li>
+</ul>
+
+<div class="tab-content responsive">
+  <div class="tab-pane active pa" id="home" align="center">
+  <div class="dtable-cell hw100">
+  <div class="container text-center">
+    <br><br>
+<h1 class="intro-title animated fadeInDown" style="color:white;font-size:35px;line-height:1.2;"> Consult the best Lawyer from your home </h1>
 <div class="row search-row animated fadeInUp">
 <div class="col-lg-4 col-sm-4 search-col relative locationicon">
 <i class="icon-location-2 icon-append"></i>
@@ -14,14 +52,97 @@
 <input type="text" name="ads" class="form-control has-icon" placeholder="I'm looking for a ..." value="">
 </div>
 <div class="col-lg-4 col-sm-4 search-col">
-<button class="btn btn-primary btn-search btn-block"><i class="icon-search"></i><strong>Find</strong></button>
+<button class="btn btn-primary btn-search btn-block"><i class="fa-search fa"></i><strong>Find</strong></button>
 </div>
 </div>
 </div>
 </div>
+  </div>
+  <div class="tab-pane pb" id="profile">
+    <div class="tab-pane active pb" id="home" align="center" >
+  <div class="dtable-cell hw100">
+  <div class="container text-center">
+  <br><br>
+<h1 class="intro-title animated fadeInDown" style="color:white;font-size:35px;line-height:1.2;"> Get brief answers for your legal queries. It's Free</h1>
+<div class="row search-row animated fadeInUp">
+<div class="col-lg-8 col-sm-8 search-col relative locationicon">
+<form action="/ask" method="get">
+<textarea rows="3" style="resize:none" cols="80" type="text" name="ques" id="autocomplete-ajax" class="form-control locinput input-rel searchtag-input has-icon" placeholder="Ask your Queries..." value="">
+</textarea>
+</div>
+
+<div class="col-lg-4 col-sm-4 search-col">
+<button type="submit" class="btn btn-primary btn-search btn-block"><i class="fa-search fa"></i><strong>Ask</strong></button>
+</div>
+</form>
 </div>
 </div>
- 
+</div>
+
+</div>
+  </div>
+  <div class="tab-pane pc" id="messages">
+        <div class="tab-pane active pd" id="home" align="center" >
+  <div class="dtable-cell hw100">
+  <div class="container text-center">
+  <br><br>
+<h1 class="intro-title animated fadeInDown" style="color:white;font-size:35px;line-height:1.2;"> Book instant appointments with Lawyers</h1>
+<div class="row search-row animated fadeInUp">
+							<div class="row a-infoInImages">
+										<div class="col-xs-12">
+											<ul class="d-iconedBulletPoints" style="color:white;font-size:20px;line-height:1.2;">
+												<li class="text-center col-xs-3"><i class="fa fa-briefcase ln-shadow"></i>
+													<div class="d-point">Choose Package</div></li>
+												<li class="text-center col-xs-3"><i class="fa fa-gears ln-shadow"></i>
+													<div class="d-point">Customize Services</div></li>
+												<li class="text-center col-xs-3"><i class="fa fa-inr ln-shadow"></i>
+													<div class="d-point">
+														Pay RS 500  <br />
+														<small>Advance</small>
+													</div></li>
+														<li class="text-center col-xs-3"><i class="fa fa-book ln-shadow"></i>
+													<div class="d-point">
+														Documentation  <br />
+														<small>process initiated</small>
+													</div></li>
+											</ul>
+										</div>
+									</div>
+</div>
+</div>
+</div>
+
+</div>
+  </div>
+  <div class="tab-pane pd" id="user">
+      <div class="tab-pane active pd" id="home" align="center" >
+  <div class="dtable-cell hw100">
+  <div class="container text-center">
+  <br><br>
+<h1 class="intro-title animated fadeInDown" style="color:white;font-size:35px;line-height:1.2;"> Book instant appointments with Lawyers</h1>
+<div class="row search-row animated fadeInUp">
+<div class="col-lg-4 col-sm-4 search-col relative locationicon">
+<i class="icon-location-2 icon-append"></i>
+<input type="text" name="country" id="autocomplete-ajax" class="form-control locinput input-rel searchtag-input has-icon" placeholder="City/Zipcode..." value="">
+</div>
+<div class="col-lg-4 col-sm-4 search-col relative"> <i class="icon-docs icon-append"></i>
+<input type="text" name="ads" class="form-control has-icon" placeholder="I'm looking for a ..." value="">
+</div>
+
+<div class="col-lg-4 col-sm-4 search-col">
+<button class="btn btn-primary btn-search btn-block"><i class="fa-search fa"></i><strong>Search</strong></button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+  </div>
+</div>
+
+
+</div>
+</div>
 <div class="main-container">
 <div class="container">
 <div class="row">
