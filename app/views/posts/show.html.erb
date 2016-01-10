@@ -25,11 +25,11 @@
 			<div class="col-md-9">
 				<article class="question single-question question-type-normal">
 					<h2>
-						<%= link_to @post.title, {:action => "show",:id => @post.id} %>
+						<%= link_to @post.title, {:controller => "posts",:action => "show",:id => @post.id} %>
 					
 					</h2>
 					<a class="question-report" href="#">Report</a>
-					<div class="question-type-main"><i class="icon-question-sign"></i>Question</div>
+					
 					<div class="question-inner">
 						<div class="clearfix"></div>
 						<p class="question-desc"><%=@post.content%></p>
@@ -39,17 +39,40 @@
 							<span class="question-favorite"><i class="fa fa-star"></i>5</span>
 						</div>
 						<span class="question-category"><a href="#"><i class="fa fa-folder"></i>wordpress</a></span>
-						<span class="question-date"><i class="fa fa-clock-o"></i><%Time.now - @post.created_at%> min ago</span>
+						<span class="question-date"><i class="fa fa-clock-o"></i><%=time_ago_in_words(@post.created_at)%> ago</span>
 						<span class="question-comment"><a href="#"><i class="fa fa-comment"></i><%=@ct.count%> Answer</a></span>
-						<span class="question-view"><i class="fa fa-user"></i>70 views</span>
-						<span class="single-question-vote-result">+22</span>
+						<span class="question-view"><i class="fa fa-user"></i><%=@f.total_view_count%> views</span>
+					
 						<ul class="single-question-vote">
+<%  pp = @liked
+  ppS = "+" + pp.to_s
+%>
+<span class="single-question-vote-result" style= 'float:right' data-id="<%= @post.id %>"><%=ppS%></span>
+<% if session[:signed] == true %>
+ <% 	ret = isliked? @post.id 
+ 		if ret != true
+ %>
+
+       <%= link_to '<i class="fa fa-thumbs-up"></i>'.html_safe, like_post_path(@post),remote: true, class: 'vote',style: 'float:right',data: { toggle_href: dislike_post_path(@post), id:
+@post.id }%>
 
 
-							<li><a href="#" class="single-question-vote-down" title="Dislike"><i class="fa fa-thumbs-down"></i></a></li>
-							
+<%		end 
+		if ret != false
+%>
 
-							<li><a href="#" class="single-question-vote-up" title="Like"><i class="fa fa-thumbs-up"></i></a></li>
+      <%= link_to '<i class="fa fa-thumbs-down"></i>'.html_safe, dislike_post_path(@post),:remote => true, class: 'vote',style: 'float:right',data: { toggle_href: like_post_path(@post), id:
+@post.id }%>
+
+<% 		end 
+  end
+
+  #negative post string
+  np = @negliked
+  npS = "-" + np.to_s
+%>
+<span class="single-question-vote-result2"  style= 'float:right' data-id="<%= @post.id %>"><%=npS%></span>
+
 						</ul>
 						<div class="clearfix"></div>
 					</div>
@@ -57,7 +80,15 @@
 				
 				<div class="share-tags page-content">
 					<div class="question-tags"><i class="fa fa-tags"></i>
-						<a href="#">wordpress</a>, <a href="#">question</a>, <a href="#">developer</a>
+
+						<%
+							@ptag.each do |t|
+								tname = Tag.find(t.tag_id).name
+						%>	
+								<%=link_to tname,{:controller => "tags",:action => "show",:id => t.tag_id}	 %>
+						<%end%>
+
+
 					</div>
 					<div class="share-inside-warp">
 						<ul>
@@ -126,6 +157,7 @@
 				    </div>
 				    <div class="author-bio">
 				        <h4>About the Author</h4>
+				        <%=@user.name%><br/>
 				        <%=@user.about%>
 				    </div>
 				</div><!-- End about-author -->
@@ -133,10 +165,10 @@
 				<div id="related-posts">
 					<h2>Related questions</h2>
 					<ul class="related-posts">
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This Is My Second Poll Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This is my third Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This is my fourth Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="icon-double-angle-right"></i>This is my fifth Question</a></h3></li>
+						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This Is My Second Poll Question</a></h3></li>
+						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This is my third Question</a></h3></li>
+						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This is my fourth Question</a></h3></li>
+						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This is my fifth Question</a></h3></li>
 					</ul>
 				</div><!-- End related-posts -->
 				
@@ -161,13 +193,39 @@
 					                	</div>
 					                	<div class="comment-vote">
 						                	<ul class="question-vote">
-						                		<li><a href="#" class="question-vote-up" title="Like"></a></li>
-						                		<li><a href="#" class="question-vote-down" title="Dislike"></a></li>
+<%pc = Votecom.where("com_id = ? AND vote_type = ?",comment.id,1).count
+  pcS = "+" + pc.to_s
+%>
+<span class="question-vote-result" data-id="<%=comment.id%>"><%=pcS%></span>						                		
+<% if session[:signed] == true %>
+ <% 	ret = islikedcom? comment.id 
+ 		if ret != true
+ %>
+
+       <%= link_to '<i class="fa fa-thumbs-o-up"></i>'.html_safe, clike_post_comment_path(@post.id,:id => comment.id),remote: true, class: 'cvote',style: 'float:right',data: { toggle_href: cdislike_post_comment_path(@post.id,:id => comment.id), id:
+comment.id }%>
+
+
+<%		end 
+		if ret != false
+%>
+
+      <%= link_to '<i class="fa fa-thumbs-o-down"></i>'.html_safe, cdislike_post_comment_path(@post.id,:id => comment.id),:remote => true, class: 'cvote',style: 'float:right',data: { toggle_href: clike_post_comment_path(@post.id,:id => comment.id), id:
+comment.id }%>
+
+<% 		end 
+  end
+  #negative comment string
+  nc = Votecom.where("com_id = ? AND vote_type = ?",comment.id,-1).count
+  ncS = "-" + nc.to_s
+%>
+<span class="question-vote-result2" data-id="<%=comment.id%>"><%=ncS%></span>
+
 						                	</ul>
 					                	</div>
-					                	<span class="question-vote-result">+1</span>
+			
 					                	<div class="comment-meta">
-					                        <div class="date"><i class="fa fa-clock-o"></i>January 15 , 2014 at 10:00 pm</div> 
+					                        <div class="date"><i class="fa fa-clock-o"></i><%=time_ago_in_words(comment.created_at)%> ago</div> 
 					                    </div>
 					                    <a class="comment-reply" href="#"><i class="fa-mail-reply fa"></i>Reply</a> 
 					                </div>
@@ -210,10 +268,10 @@
 			<aside class="col-md-3 sidebar">
 				<div class="widget widget_stats">
 					<h3 class="widget_title">Stats</h3>
-					<div class="ul_list ul_list-icon-ok">
+					<div class="">
 						<ul>
-							<li><i class="icon-question-sign"></i>Questions ( <span>20</span> )</li>
-							<li><i class="icon-comment"></i>Answers ( <span>50</span> )</li>
+							<li><i class="fa fa-question"></i> Questions ( <span><%=Post.count%></span> )</li>
+							<li><i class="fa fa-comment"></i> Answers ( <span><%=Comment.count%></span> )</li>
 						</ul>
 					</div>
 				</div>
@@ -224,7 +282,7 @@
 						<li class="rss-subscribers">
 							<a href="#" target="_blank">
 							<strong>
-								<i class="icon-rss"></i>
+								<i class="fa fa-rss"></i>
 								<span>Subscribe</span><br>
 								<small>To RSS Feed</small>
 							</strong>
@@ -251,7 +309,7 @@
 						<li class="youtube-subs">
 							<a href="#" target="_blank">
 							<strong>
-								<i class="icon-play"></i>
+								<i class="fa fa-play"></i>
 								<span>1,000</span><br>
 								<small>Subscribers</small>
 							</strong>
@@ -259,36 +317,7 @@
 						</li>
 					</ul>
 				</div>
-				
-				<div class="widget widget_login">
-					<h3 class="widget_title">Login</h3>
-					<div class="form-style form-style-2">
-						<form>
-							<div class="form-inputs clearfix">
-								<p class="login-text">
-									<input type="text" value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Username';}">
-									<i class="icon-user"></i>
-								</p>
-								<p class="login-password">
-									<input type="password" value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Password';}">
-									<i class="icon-lock"></i>
-									<a href="#">Forget</a>
-								</p>
-							</div>
-							<p class="form-submit login-submit">
-								<input type="submit" value="Log in" class="button color small login-submit submit">
-							</p>
-							<div class="rememberme">
-								<label><input type="checkbox" checked="checked"> Remember Me</label>
-							</div>
-						</form>
-						<ul class="login-links login-links-r">
-							<li><a href="#">Register</a></li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				
+
 				<div class="widget widget_highest_points">
 					<h3 class="widget_title">Highest points</h3>
 					<ul>
@@ -318,14 +347,11 @@
 				
 				<div class="widget widget_tag_cloud">
 					<h3 class="widget_title">Tags</h3>
-					<a href="#">projects</a>
-					<a href="#">Portfolio</a>
-					<a href="#">Wordpress</a>
-					<a href="#">Html</a>
-					<a href="#">Css</a>
-					<a href="#">jQuery</a>
-					<a href="#">2code</a>
-					<a href="#">vbegy</a>
+					<%
+						@tag.each do |t|							
+					%>
+						<%=link_to t.name,{:controller => "tags",:action => "show",:id => t.id}	 %>
+					<%end%>
 				</div>
 				
 				<div class="widget">

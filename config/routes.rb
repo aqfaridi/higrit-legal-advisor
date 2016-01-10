@@ -5,10 +5,21 @@ Rails.application.routes.draw do
 
   resources :users,:only => [:new, :create, :destroy,:show]
 
-  
+  resources :tags,:only => [:show]
   resources :posts, :only => [:new,:create,:destroy,:index,:show] do
-    resources :comments, :only => [:new,:create,:destroy]
+    resources :comments, :only => [:new,:create,:destroy] do
+      member do 
+        get "clike", to: "comments#clike"
+        get "cdislike", to: "comments#cdislike" 
+      end
+    end
+    member do
+        get "like", to: "posts#like"
+        get "dislike", to: "posts#dislike"
+    end
   end
+
+  get '/tag/:id', :to => 'tags#show'
   get '/profile/:id', :to => 'posts#show'
   get '/ask', :to => 'posts#new'
   get '/posts', :to => 'posts#index'

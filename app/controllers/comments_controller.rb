@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+	respond_to :json,:html,:js
 
 	def new 
 	end
@@ -12,6 +13,53 @@ class CommentsController < ApplicationController
 	end
 
 	def destroy 
+	end
+
+	def clike
+	  postid = params[:post_id]		
+	  @comid = params[:id]
+	  @userid = session[:userid]
+	  f = Votecom.where(com_id:@comid,user_id:@userid).first
+	  if f != nil
+	  	f.update_attributes(vote_type:1)
+	  else
+	  	Votecom.create(com_id:@comid,user_id:@userid,vote_type:1)
+	  end
+
+	  @cliked = Votecom.where("com_id = ? AND vote_type = ?",@comid,1).count
+	  @negcliked = Votecom.where("com_id = ? AND vote_type = ?",@comid,-1).count
+
+	  if request.xml_http_request?
+        render json: { pcount: @cliked,ncount:@negcliked, id: params[:id] }
+      else
+        logger.debug "Ajax request false"
+      end
+      
+
+	  #redirect_to post_path(postid)
+	end
+
+	def cdislike
+	  postid = params[:post_id]	
+	  @comid = params[:id]
+	  @userid = session[:userid]
+	  f = Votecom.where(com_id:@comid,user_id:@userid).first
+	  if f != nil
+	  	f.update_attributes(vote_type:-1)
+	  else
+	  	Votecom.create(com_id:@comid,user_id:@userid,vote_type:-1)
+	  end
+	  
+	  @cliked = Votecom.where("com_id = ? AND vote_type = ?",@comid,1).count
+	  @negcliked = Votecom.where("com_id = ? AND vote_type = ?",@comid,-1).count
+
+	  if request.xml_http_request?
+        render json: { pcount: @cliked,ncount:@negcliked, id: params[:id] }
+      else
+        logger.debug "Ajax request false"
+      end
+
+	  #redirect_to post_path(postid)
 	end
 
 end

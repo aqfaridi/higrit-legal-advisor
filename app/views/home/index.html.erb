@@ -1,6 +1,8 @@
 <%= javascript_include_tag '/javascripts/tab.js' %>
 <%= javascript_include_tag '/javascripts/jquery.js'%>
 
+ <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+ 
 <style>
 .pa{
 width:100%;background:url(/images/blog/3.jpg);
@@ -82,7 +84,7 @@ background-size:cover;height:350px;
 </div>
   </div>
   <div class="tab-pane pc" id="messages">
-        <div class="tab-pane active pd" id="home" align="center" >
+        <div class="tab-pane active pc" id="home" align="center" >
   <div class="dtable-cell hw100">
   <div class="container text-center">
   <br><br>

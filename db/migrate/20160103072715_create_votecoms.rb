@@ -5,6 +5,7 @@ class CreateVotecoms < ActiveRecord::Migration
       t.column :user_id,:integer
       t.column :vote_type,:integer
       t.timestamps null: false
+
     end
   end
 end

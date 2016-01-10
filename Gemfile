@@ -55,3 +55,5 @@ gem 'node', '~> 0.0.2'
 
 #gem 'therubyracer'
 #gem 'execjs'
+
+gem 'responders', '~> 2.0'

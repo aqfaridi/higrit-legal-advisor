@@ -35,4 +35,12 @@ class UsersController < ApplicationController
 
   def show 
   end
+
+  def loggedin
+    if session[:signed] == true 
+      redirect_to '/home'
+    end
+  end
+  helper_method:loggedin
+  
 end
