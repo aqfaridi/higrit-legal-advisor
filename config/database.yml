@@ -38,13 +38,17 @@ development:
 test:
    adapter: postgresql
    encoding: unicode
-   database: higrit_test
-   username: higrituser
-   password: root
+   database: d5i59d17alt2qe
+   host: ec2-54-225-165-132.compute-1.amazonaws.com
+   port: 5432
+   username: knvuttuirlmgsk
+   password: tLd3WLGX4EX5AlmlLrREaFnYWT
 
 production:
    adapter: postgresql
    encoding: unicode
-   database: higrit_production
-   username: higrituser
-   password: root
+   database: d5i59d17alt2qe
+   host: ec2-54-225-165-132.compute-1.amazonaws.com
+   port: 5432
+   username: knvuttuirlmgsk
+   password: tLd3WLGX4EX5AlmlLrREaFnYWT
