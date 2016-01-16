@@ -5,15 +5,15 @@
 		<section class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>This is my first Question</h1>
+					<h1><%=@post.title%></h1>
 				</div>
 				<div class="col-md-12">
 					<div class="crumbs">
-						<a href="#">Home</a>
+						<a href="/home">Home</a>
 						<span class="crumbs-span">/</span>
-						<a href="#">Questions</a>
+						<a href="/posts">Questions</a>
 						<span class="crumbs-span">/</span>
-						<span class="current">This is my first Question</span>
+						<span class="current"><%=@post.title%></span>
 					</div>
 				</div>
 			</div><!-- End row -->
@@ -40,7 +40,7 @@
 						</div>
 						<span class="question-category"><a href="#"><i class="fa fa-folder"></i>wordpress</a></span>
 						<span class="question-date"><i class="fa fa-clock-o"></i><%=time_ago_in_words(@post.created_at)%> ago</span>
-						<span class="question-comment"><a href="#"><i class="fa fa-comment"></i><%=@ct.count%> Answer</a></span>
+						<span class="question-comment"><a href="#"><i class="fa fa-comment"></i><%=@comments.count%> Answer</a></span>
 						<span class="question-view"><i class="fa fa-user"></i><%=@f.total_view_count%> views</span>
 					
 						<ul class="single-question-vote">
@@ -173,89 +173,15 @@
 				</div><!-- End related-posts -->
 				
 				<div id="commentlist" class="page-content">
-					<div class="boxedtitle page-title"><h2>Answers ( <span class="color"><%=@ct.count%></span> )</h2></div>
-					<ol class="commentlist clearfix">
-					    <li class="comment">
-							<%  
-									@ct.each do |comment|
-										user = User.find(comment.user_id)
-							%>
-					        <div class="comment-body comment-body-answered clearfix"> 
-					            <div class="avatar">
-					            	<a href="/profile/<%=comment.user_id%>" original-title="ahmed" class="question-author-img tooltip-n"><img alt="" src="/images/profile/avatar.png"></a>
-
-					            	</div>
-					            <div class="comment-text">
-					                <div class="author clearfix">
-					                	<div class="comment-author">
-					                <%= link_to user.name, {:controller => "users",:action => "show",:id => comment.user_id} %>
-					
-					                	</div>
-					                	<div class="comment-vote">
-						                	<ul class="question-vote">
-<%pc = Votecom.where("com_id = ? AND vote_type = ?",comment.id,1).count
-  pcS = "+" + pc.to_s
-%>
-<span class="question-vote-result" data-id="<%=comment.id%>"><%=pcS%></span>						                		
-<% if session[:signed] == true %>
- <% 	ret = islikedcom? comment.id 
- 		if ret != true
- %>
-
-       <%= link_to '<i class="fa fa-thumbs-o-up"></i>'.html_safe, clike_post_comment_path(@post.id,:id => comment.id),remote: true, class: 'cvote',style: 'float:right',data: { toggle_href: cdislike_post_comment_path(@post.id,:id => comment.id), id:
-comment.id }%>
-
-
-<%		end 
-		if ret != false
-%>
-
-      <%= link_to '<i class="fa fa-thumbs-o-down"></i>'.html_safe, cdislike_post_comment_path(@post.id,:id => comment.id),:remote => true, class: 'cvote',style: 'float:right',data: { toggle_href: clike_post_comment_path(@post.id,:id => comment.id), id:
-comment.id }%>
-
-<% 		end 
-  end
-  #negative comment string
-  nc = Votecom.where("com_id = ? AND vote_type = ?",comment.id,-1).count
-  ncS = "-" + nc.to_s
-%>
-<span class="question-vote-result2" data-id="<%=comment.id%>"><%=ncS%></span>
-
-						                	</ul>
-					                	</div>
-			
-					                	<div class="comment-meta">
-					                        <div class="date"><i class="fa fa-clock-o"></i><%=time_ago_in_words(comment.created_at)%> ago</div> 
-					                    </div>
-					                    <a class="comment-reply" href="#"><i class="fa-mail-reply fa"></i>Reply</a> 
-					                </div>
-					                <div class="text"><p><%=comment.content%></p>
-					                </div>
-									<div class="question-answered question-answered-done"><i class="fa fa-check"></i>Best Answer</div>
-					            </div>
-					        </div>
-					        <%end%>	
-
-					    </li>
-					</ol><!-- End commentlist -->
+					<div class="boxedtitle page-title"><h2>Answers ( <span class="color"><%=@comments.count%></span> )</h2></div>
+<ol class="commentlist clearfix">
+	<%= comments_tree_for @comments %>
+</ol><!-- End commentlist -->
 				</div><!-- End page-content -->
-				<div id="respond" class="comment-respond page-content clearfix">
-				    <div class="boxedtitle page-title"><h2>Leave a reply</h2></div>
-				    
-				    <%= form_for @comment, :url => post_comments_path(@post) do |f| %>
-				        <div id="respond-textarea">
-				            <p>
-				                <label class="required" for="comment">Comment<span>*</span></label>
-				          
-				                <%= f.text_area :content,cols:'58',rows:'8',placeholder:'Description'%>
-				            </p>
-				        </div>
-				        <p class="form-submit">
-				        	<%= f.submit "Post Your Answer",id:"publish-question",class: "button color small submit" %>
-				        </p>
-				    <%end%>
-				</div>
-				
+
+<%if(session[:signed] == true)%>
+	<%=	render 'form' %>	
+<%end%>				
 				<div class="post-next-prev clearfix">
 				    <p class="prev-post">
 				        <a href="#"><i class="fa-fast-backward fa"></i>&nbsp;Prev question</a>

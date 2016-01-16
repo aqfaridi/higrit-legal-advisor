@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 	
 	  @tag = Tag.order('rank DESC')
 	  @ptag = Postag.where(post_id:@post.id)
-	  @ct = Comment.where(post_id:@post.id)
+	  @comments = Comment.where(post_id:@post.id).hash_tree
 	end
 
 	def destroy 

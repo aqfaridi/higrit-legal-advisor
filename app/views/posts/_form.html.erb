@@ -1,0 +1,30 @@
+<div id="respond" class="comment-respond page-content clearfix">
+    <div class="boxedtitle page-title"><h2>Leave a reply</h2></div>
+    
+    <%= form_for @comment, :url => post_comments_path(@post) do |f| %>
+    <%= f.hidden_field :parent_id %>
+    
+ <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% @comment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+        <div id="respond-textarea">
+            <p>
+                <label class="required" for="comment">Comment<span>*</span></label>
+          
+                <%= f.text_area :content,cols:'58',rows:'8',placeholder:'Description'%>
+            </p>
+        </div>
+        <p class="form-submit">
+        	<%= f.submit "Post Your Answer",id:"publish-question",class: "button color small submit" %>
+        </p>
+    <%end%>
+</div>

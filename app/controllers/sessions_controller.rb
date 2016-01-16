@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
 		user = User.where(email: @email)
 		
 		if(user.count == 0)
+			flash[:danger] = "Invalid UserID"
 			render 'new'
 		else
 			user = user.first
@@ -21,7 +22,7 @@ class SessionsController < ApplicationController
 				session[:userid] = user.id
 				redirect_to '/home'
 			else
-				#flash.now[:error] = "Invalid email/password combination."
+				flash[:danger] = "Invalid email/password combination."
 				render 'new'
 			end
 		end

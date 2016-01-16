@@ -57,3 +57,4 @@ gem 'node', '~> 0.0.2'
 #gem 'execjs'
 
 gem 'responders', '~> 2.0'
+gem 'closure_tree'

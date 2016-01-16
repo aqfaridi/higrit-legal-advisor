@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   get '/home', to: 'home#index'
-  resources :sessions,  :only => [:new, :create, :destroy]
   #get '/signup', to: 'users#new'
-
   resources :users,:only => [:new, :create, :destroy,:show]
 
   resources :tags,:only => [:show]
@@ -12,6 +10,7 @@ Rails.application.routes.draw do
         get "clike", to: "comments#clike"
         get "cdislike", to: "comments#cdislike" 
       end
+      get '/:parent_id', to: 'comments#new', as: :new_comment
     end
     member do
         get "like", to: "posts#like"
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
   get '/posts', :to => 'posts#index'
   get '/signup',  :to => 'users#new'
   get '/login',  :to => 'sessions#new'
+  match '/login',  :to => 'sessions#create', :via => [:get,:post], :as => :post_login
   get 'logout', :to => 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

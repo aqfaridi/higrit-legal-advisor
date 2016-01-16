@@ -12,7 +12,7 @@
 </div>
 
 <div class="panel-body">
-<%= form_for(:session, :url => sessions_path) do |f| %>
+<%= form_for(:session, :url => post_login_path) do |f| %>
 <div class="form-group">
 	<%= f.label :email ,class: "control-label" %>
 	<div class="input-icon"> <i class="fa-user fa"></i>
@@ -27,7 +27,13 @@
 </div>
 <div class="form-group">
 	    <%= f.submit "Sign in",class: "btn btn-primary  btn-block" %>
-	   
+  <ul>
+  <% flash.each do |key, value| %>
+        <li style='color:red'>*<%=value%>  </li>
+  <% end %>
+  </ul>
+
+
 </div>
 <% end %>
 </div>

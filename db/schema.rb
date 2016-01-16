@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108113029) do
+ActiveRecord::Schema.define(version: 20160114203307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20160108113029) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comment_hierarchies", force: :cascade do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "post_id"
@@ -30,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160108113029) do
     t.datetime "published_at"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "parent_id"
   end
 
   create_table "postags", id: false, force: :cascade do |t|
@@ -63,21 +70,22 @@ ActiveRecord::Schema.define(version: 20160108113029) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",       limit: 32,                         null: false
-    t.string   "mobile",     limit: 10,                         null: false
-    t.string   "email",                                         null: false
+    t.string   "name",             limit: 32,                         null: false
+    t.string   "mobile",           limit: 10,                         null: false
+    t.string   "email",                                               null: false
     t.string   "salt"
-    t.string   "password",                                      null: false
-    t.string   "gender",                                        null: false
+    t.string   "password",                                            null: false
+    t.string   "gender",                                              null: false
     t.string   "dob"
-    t.string   "imagename",             default: "default.jpg"
+    t.string   "imagename",                   default: "default.jpg"
     t.text     "about"
     t.string   "ckey"
     t.string   "ctime"
-    t.string   "mobileflag",            default: "0"
-    t.string   "emailflag",             default: "0"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.string   "mobileflag",                  default: "0"
+    t.string   "emailflag",                   default: "0"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.integer  "total_view_count",            default: 0
   end
 
   create_table "views", force: :cascade do |t|

@@ -1,0 +1,15 @@
+ <%= stylesheet_link_tag "/stylesheets/style2.css" %>
+ <%= stylesheet_link_tag "/stylesheets/base.css" %>
+
+
+<div id="commentlist" class="page-content">
+<ol class="commentlist clearfix">
+<% if @comment.parent %>
+  <%= render 'comment', comment: @comment.parent, from_reply_form: true %>
+<% end %>
+
+
+
+<%= render 'posts/form' %>
+
+</div></div>

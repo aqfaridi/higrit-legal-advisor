@@ -1,18 +1,33 @@
 class CommentsController < ApplicationController
 	respond_to :json,:html,:js
 
-	def new 
+	def new
+		@comment = Comment.new(parent_id: params[:parent_id])
+		@post = Post.find(params[:post_id])
 	end
 
 	def create
 		@content = params[:comment][:content]
 		@userid = session[:userid]
 		@postid = params[:post_id]
-		Comment.create(user_id:@userid,post_id:@postid,content:@content,flag:true)
-    	redirect_to post_path(@postid)
+		c = {user_id:@userid,post_id:@postid,content:@content,flag:true}
+		if params[:comment][:parent_id].to_i > 0
+    	  parent = Comment.find_by_id(params[:comment][:parent_id])
+    	  @comment = parent.children.build(c)
+  		else
+   		  @comment = Comment.new(c)
+	    end
+		
+		if @comment.save
+    	  flash[:success] = 'Your comment was successfully added!'
+    	  redirect_to post_path(@postid)
+  		else
+    	  render 'new'
+  		end
+
 	end
 
-	def destroy 
+	def destroy
 	end
 
 	def clike

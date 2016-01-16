@@ -1,0 +1,70 @@
+					
+					    <li class="comment">
+							<%  
+										user = User.find(comment.user_id)
+							%>
+					        <div class="comment-body comment-body-answered clearfix"> 
+
+					                	<div class="comment-vote">
+						                	<ul class="question-vote">
+<%pc = Votecom.where("com_id = ? AND vote_type = ?",comment.id,1).count
+  pcS = "+" + pc.to_s
+%>
+<span class="question-vote-result" data-id="<%=comment.id%>"><%=pcS%></span>						                		
+<% if session[:signed] == true %>
+ <% 	ret = islikedcom? comment.id 
+ 		if ret != true
+ %>
+
+       <%= link_to '<i class="fa fa-thumbs-o-up"></i>'.html_safe, clike_post_comment_path(@post.id,:id => comment.id),remote: true, class: 'cvote',style: 'float:right',data: { toggle_href: cdislike_post_comment_path(@post.id,:id => comment.id), id:
+comment.id }%>
+
+
+<%		end 
+		if ret != false
+%>
+
+      <%= link_to '<i class="fa fa-thumbs-o-down"></i>'.html_safe, cdislike_post_comment_path(@post.id,:id => comment.id),:remote => true, class: 'cvote',style: 'float:right',data: { toggle_href: clike_post_comment_path(@post.id,:id => comment.id), id:
+comment.id }%>
+
+<% 		end 
+  end
+  #negative comment string
+  nc = Votecom.where("com_id = ? AND vote_type = ?",comment.id,-1).count
+  ncS = "-" + nc.to_s
+%>
+<span class="question-vote-result2" data-id="<%=comment.id%>"><%=ncS%></span>
+
+						                	</ul>
+					                	</div>
+					                	
+					            <div class="avatar">
+					            	<a href="/profile/<%=comment.user_id%>" original-title="ahmed" class="question-author-img tooltip-n"><img alt="" src="/images/profile/avatar.png"></a>
+
+					            	</div>
+					            <div class="comment-text">
+					                <div class="author clearfix">
+					                	<div class="comment-author">
+					                <%= link_to user.name, {:controller => "users",:action => "show",:id => comment.user_id} %>
+					
+					                	</div>
+			
+					                	<div class="comment-meta">
+					                        <div class="date"><i class="fa fa-clock-o"></i><%=time_ago_in_words(comment.created_at)%> ago</div> 
+					                    </div>
+
+
+<% from_reply_form ||= nil %>
+<% unless from_reply_form %>
+
+<%= link_to '<i class="fa-mail-reply fa"></i>'.html_safe,post_comment_new_comment_path(@post.id,comment.id,comment.id),class: 'comment-reply'  %>
+
+<%end%>
+
+					                </div>
+					                <div class="text"><blockquote><p><%=comment.content%></blockquote></p>
+					                </div>
+									<div class="question-answered question-answered-done"><i class="fa fa-check"></i>Best Answer</div>
+					            </div>
+					        </div>
+					     </li>
