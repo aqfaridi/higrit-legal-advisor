@@ -1,6 +1,6 @@
 # higrit-legal-advisor
 
-HiGrit is a blogging engine built on ruby on rails platform to organize and simplify legal search services.
+HiGrit is a blogging engine built on ruby on rails platform with postgres database to organize and simplify legal search services.
 
 Demo : http://infinite-earth-9525.herokuapp.com/
 
@@ -38,7 +38,8 @@ ruby -v
  
 - Open psql Shell : 
 
-i. Press Enter to continue with default user(postgres) and port 5432:
+i. Press Enter to continue with default user(postgres) and port 5432
+
 ii. Create New SuperUser for Project 
 ```ruby
 postgres=# CREATE ROLE rubyuser LOGIN ENCRYPTED PASSWORD 'md57c9aeb504d6af71fa00e37ca8336a466' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;
@@ -59,10 +60,11 @@ postgres=# CREATE DATABASE higrit_production OWNER rubyuser;
 ```
 
 ## Some commands of postgres 
-\l : show databases
-\c library_development : connect database_name
-\dt : show tables
-\d+ tablename  : show table description
+
+- \l : show databases
+- \c library_development : connect database_name
+- \dt : show tables
+- \d+ tablename  : show table description
 
 
 # Configuration
@@ -72,9 +74,9 @@ postgres=# CREATE DATABASE higrit_production OWNER rubyuser;
 ```ruby
 git clone https://github.com/aqfaridi/higrit-legal-advisor.git
 ```
-OR
+ OR
 
-Download zip github repository and simply extract it to devkit folder 
+ Download zip github repository and simply extract it to devkit folder 
 
 3. Open config/database.yml file 
 
