@@ -79,43 +79,46 @@ postgres=# CREATE DATABASE higrit_production OWNER rubyuser;
 
 3. Open config/database.yml file 
 
-change development: 
-```ruby
-development:
-   adapter: postgresql
-   encoding: unicode
-   database: higrit_development
-   username: rubyuser 
-   password: root
-```
+	change development: 
+	```ruby
+	development:
+	   adapter: postgresql
+	   encoding: unicode
+	   database: higrit_development
+	   username: rubyuser 
+	   password: root
+	```
 
-database => name of database in postgres you want to use for development
+	database => name of database in postgres you want to use for development
 
-username => owner of the database
+	username => owner of the database
 
 
 
-- You can create different database, open psql : 
-```ruby
-postgres=# CREATE DATABASE <database_name> OWNER <username>;
-```
+	- You can create different database, open psql : 
+	```ruby
+	postgres=# CREATE DATABASE <database_name> OWNER <username>;
+	```
 
 4. Open cmd prompt in project folder , run bundle to install required gems and Migration to create Tables in db
-```ruby
-bundle install 
-rake db:migrate
-```
+
+	```ruby
+	bundle install 
+	rake db:migrate
+	```
 
 5. Run server 
-```ruby
-rails s
-```
+
+	```ruby
+	rails s
+	```
 
 6. Open Browser and put url
 
-```ruby
-localhost:3000
-```
+	```ruby
+	localhost:3000
+	```
+	
 Here you go !! signup the new user , sign in and create blog .. Enjoy :)
 
 
