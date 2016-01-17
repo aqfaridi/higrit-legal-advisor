@@ -71,12 +71,11 @@ postgres=# CREATE DATABASE higrit_production OWNER rubyuser;
 
 1. Navigate to devkit folder in c: drive
 2. Open Git Bash there and execute : 
-```ruby
-git clone https://github.com/aqfaridi/higrit-legal-advisor.git
-```
- OR
-
- Download zip github repository and simply extract it to devkit folder 
+	```ruby
+	git clone https://github.com/aqfaridi/higrit-legal-advisor.git
+	```
+	OR
+	Download zip github repository and simply extract it to devkit folder 
 
 3. Open config/database.yml file 
 
@@ -121,7 +120,9 @@ Here you go !! signup the new user , sign in and create blog .. Enjoy :)
 
 
 ### Dont Forget to put some categories of blog in Category table : 
-1. Open cmd prompt in project folder to open rails console
+
+Open cmd prompt in project folder to open rails console
+
 ```ruby
 rails c
 Category.create(name:"Divorce")
