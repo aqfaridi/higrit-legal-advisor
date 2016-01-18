@@ -2,13 +2,14 @@
  <%= stylesheet_link_tag "/stylesheets/base.css" %>
 
 
-<div id="commentlist" class="question question-type-normal">
+<div id="commentlist" class="page-content">
 <ol class="commentlist clearfix">
 <% if @comment.parent %>
   <%= render 'comment', comment: @comment.parent, from_reply_form: true %>
 <% end %>
-</ol>
-</div>
+
+
 
 <%= render 'posts/form' %>
 
+</div></div>

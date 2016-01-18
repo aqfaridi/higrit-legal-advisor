@@ -1,11 +1,3 @@
- <%= javascript_include_tag "/javascripts/nicEdit.js" %>
-<script type="text/javascript">
-bkLib.onDomLoaded(function() {
-	new nicEditor().panelInstance('area1');
-
-});
-</script>
-
 <div id="respond" class="comment-respond page-content clearfix">
     <div class="boxedtitle page-title"><h2>Leave a reply</h2></div>
     
@@ -28,7 +20,7 @@ bkLib.onDomLoaded(function() {
             <p>
                 <label class="required" for="comment">Comment<span>*</span></label>
           
-                <%= f.text_area :content,cols:'58',rows:'8',id:"area1",placeholder:'Description'%>
+                <%= f.text_area :content,cols:'58',rows:'8',placeholder:'Description'%>
             </p>
         </div>
         <p class="form-submit">

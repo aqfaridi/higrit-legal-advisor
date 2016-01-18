@@ -1,16 +1,6 @@
  <%= stylesheet_link_tag "/stylesheets/style2.css" %>
  <%= stylesheet_link_tag "/stylesheets/base.css" %>
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1659450274342868";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-	
-
 	<div class="breadcrumbs">
 		<section class="container">
 			<div class="row">
@@ -42,7 +32,7 @@
 					
 					<div class="question-inner">
 						<div class="clearfix"></div>
-						<p class="question-desc"><%=@post.content.html_safe%></p>
+						<p class="question-desc"><%=@post.content%></p>
 		
 						<div class="question-details">
 							<span class="question-answered question-answered-done"><i class="fa fa-check"></i>solved</span>
@@ -100,7 +90,6 @@
 
 
 					</div>
-					<div class="fb-share-button" data-href="<%=request.original_url%>" data-layout="icon_link"></div>
 					<div class="share-inside-warp">
 						<ul>
 							<li>
@@ -111,7 +100,6 @@
 										</span>
 									</span>
 								</a>
-
 								<a href="#" target="_blank">Facebook</a>
 							</li>
 							<li>
