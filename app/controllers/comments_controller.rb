@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
 	def create
 		@content = params[:comment][:content]
 		@userid = session[:userid]
-		@postid = params[:post_id]
+		@postid = Post.find(params[:post_id]).id #string of slug
+		
 		c = {user_id:@userid,post_id:@postid,content:@content,flag:true}
 		if params[:comment][:parent_id].to_i > 0
     	  parent = Comment.find_by_id(params[:comment][:parent_id])
@@ -20,7 +21,7 @@ class CommentsController < ApplicationController
 		
 		if @comment.save
     	  flash[:success] = 'Your comment was successfully added!'
-    	  redirect_to post_path(@postid)
+    	  redirect_to post_path(params[:post_id])
   		else
     	  render 'new'
   		end

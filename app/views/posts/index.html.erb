@@ -32,7 +32,7 @@
 				%>
 					<article class="question question-type-normal">
 					<h2>
-						<%= link_to post.title, {:action => "show",:id => post.id} %>
+						<%= link_to post.title, {:action => "show",:id => post.friendly_id} %>
 					
 					</h2>
 					<a class="question-report" href="#">Report</a>
@@ -42,7 +42,8 @@
 					</div>
 					<div class="question-inner">
 						<div class="clearfix"></div>
-						<p class="question-desc"><%=post.content.html_safe%></p>
+						<p class="question-desc"><%=truncate post.content.html_safe, length: 250%>
+						<%= link_to 'read more', {:action => "show",:id => post.id} %></p>
 						<div class="question-details">
 							<span class="question-answered question-answered-done"><i class="fa fa-check"></i>solved</span>
 							<span class="question-favorite"><i class="fa fa-star"></i>5</span>
@@ -139,16 +140,8 @@
 						</li>
 					</ul>
 				</div>
-				
-				<div class="widget widget_tag_cloud">
-					<h3 class="widget_title">Tags</h3>
-					<%
-						@tag.each do |t|							
-					%>
-						<%=link_to t.name,{:controller => "tags",:action => "show",:id => t.id}	 %>
-					<%end%>
-				</div>
-				
+				<%= render 'tagwidget' %>
+			
 				<div class="widget">
 					<h3 class="widget_title">Recent Questions</h3>
 					<ul class="related-posts">

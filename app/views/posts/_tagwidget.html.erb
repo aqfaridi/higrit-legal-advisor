@@ -1,0 +1,8 @@
+				<div class="widget widget_tag_cloud">
+					<h3 class="widget_title">Tags</h3>
+					<%
+						@tag.each do |t|							
+					%>
+						<%=link_to t.name,{:controller => "tags",:action => "show",:id => t.friendly_id}	 %>
+					<%end%>
+				</div>

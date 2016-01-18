@@ -57,7 +57,7 @@ comment.id }%>
 <% from_reply_form ||= nil %>
 <% unless from_reply_form %>
 
-<%= link_to '<i class="fa-mail-reply fa"></i>'.html_safe,post_comment_new_comment_path(@post.id,comment.id,comment.id),class: 'comment-reply'  %>
+<%= link_to '<i class="fa-mail-reply fa"></i>'.html_safe,post_comment_new_comment_path(@post.friendly_id,comment.id,comment.id),class: 'comment-reply'  %>
 
 <%end%>
 

@@ -4,4 +4,6 @@ class Post < ActiveRecord::Base
   has_many :voteposts
   has_many :comments
   has_many :postags
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders]
 end

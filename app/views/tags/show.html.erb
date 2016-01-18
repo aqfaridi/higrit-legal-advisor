@@ -144,14 +144,7 @@
 					</ul>
 				</div>
 				
-				<div class="widget widget_tag_cloud">
-					<h3 class="widget_title">Tags</h3>
-					<%
-						@tag.each do |t|							
-					%>
-						<%=link_to t.name,{:controller => "tags",:action => "show",:id => t.id}	 %>
-					<%end%>
-				</div>
+				<%= render 'posts/tagwidget' %>
 				
 				<div class="widget">
 					<h3 class="widget_title">Recent Questions</h3>

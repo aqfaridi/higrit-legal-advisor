@@ -58,11 +58,9 @@ new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1')
 									</span>
 									<span class="form-description">Please choose the appropriate section so easily search for your question .</span>
 								</p>
-							
-							</div>
-							<div id="form-textarea">
+								<label class="required">Details<span>*</span></label>
+						   
 								<p>
-									<label class="required">Details<span>*</span></label>
 									<%= f.text_area :content,id:'question-details',cols:'58',rows:'8',id:'area1',placeholder:'Description',value:params[:ques]%>
 								
 									<span class="form-description">Type the description thoroughly and in detail .</span>

@@ -58,3 +58,4 @@ gem 'node', '~> 0.0.2'
 
 gem 'responders', '~> 2.0'
 gem 'closure_tree'
+gem 'friendly_id'
