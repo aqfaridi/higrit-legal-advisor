@@ -62,7 +62,7 @@ comment.id }%>
 <%end%>
 
 					                </div>
-					                <div class="text"><blockquote><p><%=comment.content%></blockquote></p>
+					                <div class="text"><blockquote><p><%=comment.content.html_safe%></blockquote></p>
 					                </div>
 									<div class="question-answered question-answered-done"><i class="fa fa-check"></i>Best Answer</div>
 					            </div>
