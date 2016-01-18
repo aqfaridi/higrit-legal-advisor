@@ -3,8 +3,6 @@ class PostsController < ApplicationController
 
 	def new
 	  @post = Post.new
-	  @tag = Tag.order('rank DESC')
-	  @ptag = Postag.where(post_id:@post.id)
 	end
 
 	def create 

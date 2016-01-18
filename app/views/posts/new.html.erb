@@ -1,14 +1,8 @@
  <%= stylesheet_link_tag "/stylesheets/style2.css" %>
  <%= stylesheet_link_tag "/stylesheets/base.css" %>
- <%= javascript_include_tag "/javascripts/nicEdit.js" %>
- <script>
-bkLib.onDomLoaded(function() {
-	//new nicEditor().panelInstance('area1');
-new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1');
-});
-</script>
-  
+
 <% isset %>
+
 <div id="wrap" class="grid_1200">
 
 	<div class="breadcrumbs">
@@ -63,7 +57,7 @@ new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1')
 							<div id="form-textarea">
 								<p>
 									<label class="required">Details<span>*</span></label>
-									<%= f.text_area :content,id:'question-details',cols:'58',rows:'8',id:'area1',placeholder:'Description',value:params[:ques]%>
+									<%= f.text_area :content,id:'question-details',cols:'58',rows:'8',placeholder:'Description',value:params[:ques]%>
 								
 									<span class="form-description">Type the description thoroughly and in detail .</span>
 								</p>
@@ -78,10 +72,10 @@ new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1')
 			<aside class="col-md-3 sidebar">
 				<div class="widget widget_stats">
 					<h3 class="widget_title">Stats</h3>
-					<div class="">
+					<div class="ul_list ul_list-icon-ok">
 						<ul>
-							<li><i class="fa fa-question"></i>Questions ( <span><%=Post.count%></span> )</li>
-							<li><i class="fa fa-comment"></i>Answers ( <span><%=Comment.count%></span> )</li>
+							<li><i class="icon-question-sign"></i>Questions ( <span>20</span> )</li>
+							<li><i class="icon-comment"></i>Answers ( <span>50</span> )</li>
 						</ul>
 					</div>
 				</div>
@@ -92,7 +86,7 @@ new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1')
 						<li class="rss-subscribers">
 							<a href="#" target="_blank">
 							<strong>
-								<i class="fa fa-rss"></i>
+								<i class="icon-rss"></i>
 								<span>Subscribe</span><br>
 								<small>To RSS Feed</small>
 							</strong>
@@ -119,7 +113,7 @@ new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1')
 						<li class="youtube-subs">
 							<a href="#" target="_blank">
 							<strong>
-								<i class="fa fa-play"></i>
+								<i class="icon-play"></i>
 								<span>1,000</span><br>
 								<small>Subscribers</small>
 							</strong>
@@ -128,7 +122,34 @@ new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1')
 					</ul>
 				</div>
 				
-
+				<div class="widget widget_login">
+					<h3 class="widget_title">Login</h3>
+					<div class="form-style form-style-2">
+						<form>
+							<div class="form-inputs clearfix">
+								<p class="login-text">
+									<input type="text" value="Username" onfocus="if (this.value == 'Username') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Username';}">
+									<i class="icon-user"></i>
+								</p>
+								<p class="login-password">
+									<input type="password" value="Password" onfocus="if (this.value == 'Password') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Password';}">
+									<i class="icon-lock"></i>
+									<a href="#">Forget</a>
+								</p>
+							</div>
+							<p class="form-submit login-submit">
+								<input type="submit" value="Log in" class="button color small login-submit submit">
+							</p>
+							<div class="rememberme">
+								<label><input type="checkbox" checked="checked"> Remember Me</label>
+							</div>
+						</form>
+						<ul class="login-links login-links-r">
+							<li><a href="#">Register</a></li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</div>
 				
 				<div class="widget widget_highest_points">
 					<h3 class="widget_title">Highest points</h3>
@@ -159,13 +180,15 @@ new nicEditor({iconsPath : '/images/nicEditorIcons.gif'}).panelInstance('area1')
 				
 				<div class="widget widget_tag_cloud">
 					<h3 class="widget_title">Tags</h3>
-					<%
-						@tag.each do |t|							
-					%>
-						<%=link_to t.name,{:controller => "tags",:action => "show",:id => t.id}	 %>
-					<%end%>
+					<a href="#">projects</a>
+					<a href="#">Portfolio</a>
+					<a href="#">Wordpress</a>
+					<a href="#">Html</a>
+					<a href="#">Css</a>
+					<a href="#">jQuery</a>
+					<a href="#">2code</a>
+					<a href="#">vbegy</a>
 				</div>
-				
 				
 				<div class="widget">
 					<h3 class="widget_title">Recent Questions</h3>
