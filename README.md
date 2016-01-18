@@ -7,7 +7,8 @@ Demo : http://infinite-earth-9525.herokuapp.com/
 ## Some features:
 
 - tags (or categories)
-- nested comments (reply)
+- nested comments (reply) closure_tree gem
+- pretty urls : friendly_id gem
 - integrated bootstrap in rails
 - multiple users
 - Post a Free Query : Post your free online legal query with us.
