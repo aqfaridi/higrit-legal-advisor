@@ -42,9 +42,7 @@
 					</div>
 					<div class="question-inner">
 						<div class="clearfix"></div>
-						<p class="question-desc"><%= truncate post.content, length: 160%>
-							 <%= link_to 'read more', {:action => "show",:id => post.id} %>	
-						</p>
+						<p class="question-desc"><%=post.content.html_safe%></p>
 						<div class="question-details">
 							<span class="question-answered question-answered-done"><i class="fa fa-check"></i>solved</span>
 							<span class="question-favorite"><i class="fa fa-star"></i>5</span>
