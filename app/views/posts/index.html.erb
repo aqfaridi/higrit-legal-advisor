@@ -21,44 +21,9 @@
 	<section class="container main-content">
 		<div class="row">
 			<div class="col-md-9">
-				<%  
-					@posts.each do |post|
-						ct = Comment.where(post_id:post.id)
-						c = 0
-						f = View.find_by_post_id(post.id)
-						if f != nil
-							c = f.total_view_count
-						end
-				%>
-					<article class="question question-type-normal">
-					<h2>
-						<%= link_to post.title, {:action => "show",:id => post.friendly_id} %>
-					
-					</h2>
-					<a class="question-report" href="#">Report</a>
-					
-					<div class="question-author">	
-						<a href="/profile/<%=post.user_id%>" original-title="ahmed" class="question-author-img tooltip-n"><img alt="" src="/images/profile/avatar.png"></a>
-					</div>
-					<div class="question-inner">
-						<div class="clearfix"></div>
-						<p class="question-desc"><%=truncate post.content.html_safe, length: 250%>
-						<%= link_to 'read more', {:action => "show",:id => post.id} %></p>
-						<div class="question-details">
-							<span class="question-answered question-answered-done"><i class="fa fa-check"></i>solved</span>
-							<span class="question-favorite"><i class="fa fa-star"></i>5</span>
-						</div>
-						<span class="question-category"><a href="#"><i class="icon-folder"></i>wordpress</a></span>
-						<span class="question-date"><i class="fa fa-clock-o"></i><%=time_ago_in_words(post.created_at)%> ago</span>
-						<span class="question-comment"><a href="#"><i class="fa fa-comment"></i><%=ct.count%> Answer</a></span>
-						<span class="question-view"><i class="fa fa-user"></i><%=c%> views</span>
-						<div class="clearfix"></div>
-					</div>
-				</article>
-					<% end %>
-						
+				<%=  render @posts %>						
 				
-				<a href="#" class="load-questions"><i class="icon-refresh"></i>Load More Questions</a>
+				<a href="#" class="load-questions"><i class="fa fa-refresh"></i>Load More Questions</a>
 			</div><!-- End main -->
 			<aside class="col-md-3 sidebar">
 				<div class="widget widget_stats">

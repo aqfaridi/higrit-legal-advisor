@@ -93,9 +93,12 @@
 
 						<%
 							@ptag.each do |t|
-								tname = Tag.find(t.tag_id).name
-						%>	
-								<%=link_to tname,{:controller => "tags",:action => "show",:id => t.tag_id}	 %>
+								obj = Tag.find(t.tag_id)
+								tname = obj.name
+								tf_id = obj.friendly_id
+				
+				   		%>	
+								<%=link_to tname,{:controller => "tags",:action => "show",:id => tf_id}	 %>
 						<%end%>
 
 

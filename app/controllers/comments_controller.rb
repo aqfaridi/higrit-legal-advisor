@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
 		@content = params[:comment][:content]
 		@userid = session[:userid]
 		@postid = Post.find(params[:post_id]).id #string of slug
-		
+
 		c = {user_id:@userid,post_id:@postid,content:@content,flag:true}
 		if params[:comment][:parent_id].to_i > 0
     	  parent = Comment.find_by_id(params[:comment][:parent_id])
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 	end
 
 	def clike
-	  postid = params[:post_id]		
+	  postid =  Post.find(params[:post_id]).id	
 	  @comid = params[:id]
 	  @userid = session[:userid]
 	  f = Votecom.where(com_id:@comid,user_id:@userid).first
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
 	end
 
 	def cdislike
-	  postid = params[:post_id]	
+	  postid =  Post.find(params[:post_id]).id	
 	  @comid = params[:id]
 	  @userid = session[:userid]
 	  f = Votecom.where(com_id:@comid,user_id:@userid).first

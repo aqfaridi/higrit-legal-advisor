@@ -36,10 +36,10 @@ class PostsController < ApplicationController
 
 
 	def index
-		@posts = Post.order('id DESC')
+		@posts = Post.order('id DESC').limit(10)
 		@tag = Tag.order('rank DESC')
 	end
-
+                    
 	def show
 	  @post = Post.find(params[:id])
 	  
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
 	  @negliked = Votepost.where("post_id = ? AND vote_type = ?",@post.id,-1).count
 
 	  if request.xml_http_request?
-        render json: { pcount: @liked,ncount:@negliked, id: params[:id] }
+        render json: { pcount: @liked,ncount:@negliked, id: @post.id }
       else
         logger.debug "Ajax request false"
       end
@@ -100,15 +100,16 @@ class PostsController < ApplicationController
 	  @negliked = Votepost.where("post_id = ? AND vote_type = ?",@post.id,-1).count
   
       if request.xml_http_request?
-        render json: { pcount: @liked,ncount:@negliked, id: params[:id] }
+        render json: { pcount: @liked,ncount:@negliked, id: @post.id }
 	  end
 
 	  #redirect_to @post
 	end
 
 	def isliked?(postid)
+		p = Post.find(postid)
 		userid = session[:userid]
-		f = Votepost.where(user_id:userid,post_id:postid).first
+		f = Votepost.where(user_id:userid,post_id:p).first
 		if f != nil
 			return f.vote_type == 1
 		else
