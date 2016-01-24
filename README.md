@@ -10,7 +10,7 @@ Demo : http://infinite-earth-9525.herokuapp.com/
 - nested comments (reply) closure_tree gem
 - Upvote/Downvote Ajax in Rails : responders gem
 - pretty urls : friendly_id gem
-- Related queries using Inverse Document Frequency(tf-idf) : nokogiri & htmlentities gem
+- Text Mining Related queries using Inverse Document Frequency(tf-idf) : nokogiri & htmlentities gem
 - integrated bootstrap in rails : bootstrap-sass gem
 - multiple users
 - Post a Free Query : Post your free online legal query with us.
