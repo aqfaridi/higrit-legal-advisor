@@ -8,12 +8,16 @@ Demo : http://infinite-earth-9525.herokuapp.com/
 
 - tags (or categories)
 - nested comments (reply) closure_tree gem
+- Upvote/Downvote Ajax in Rails : responders gem
 - pretty urls : friendly_id gem
-- integrated bootstrap in rails
+- Related queries using Inverse Document Frequency(tf-idf) : nokogiri & htmlentities gem
+- integrated bootstrap in rails : bootstrap-sass gem
 - multiple users
 - Post a Free Query : Post your free online legal query with us.
+- Search for Lawyers : Find best lawyers in your nearby location.
 - Get Instant Answers : Lawyers from various domains will get back to you in a while.
 - Search Queries Tag-wise and Rate : Get all the categorised answers and rate the queries and answers
+- Admin Panel for moderation
 
 # Prerequisites
 

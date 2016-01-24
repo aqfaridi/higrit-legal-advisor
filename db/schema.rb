@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160118185013) do
+ActiveRecord::Schema.define(version: 20160124120657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,9 +55,11 @@ ActiveRecord::Schema.define(version: 20160118185013) do
     t.boolean  "flag"
     t.integer  "cat_id"
     t.datetime "published_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "slug"
+    t.text     "words"
+    t.string   "related_posts"
   end
 
   add_index "posts", ["id"], name: "index_posts_on_id", unique: true, using: :btree

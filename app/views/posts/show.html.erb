@@ -180,10 +180,14 @@
 				<div id="related-posts">
 					<h2>Related questions</h2>
 					<ul class="related-posts">
-						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This Is My Second Poll Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This is my third Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This is my fourth Question</a></h3></li>
-						<li class="related-item"><h3><a href="#"><i class="fa fa-angle-double-right"></i>This is my fifth Question</a></h3></li>
+						<% @relates.each do |relate|
+						%>	
+						
+						<li class="related-item"><h3><i class="fa fa-angle-double-right"></i>	
+						<%= link_to relate.title , {:action => "show",:id => relate.friendly_id} %>
+						</h3></li>
+
+						<%end%>
 					</ul>
 				</div><!-- End related-posts -->
 				

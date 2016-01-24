@@ -28,7 +28,9 @@ class PostsController < ApplicationController
 
 				Postag.create(post_id:@post.id,tag_id:var.id)
 			end
-
+      		@post.update_related!
+      		@post.related.each { |p| p.update_related! }
+      		flash[:success] = 'Post was created successfully.'
 			redirect_to '/home'
 		end
 
@@ -42,7 +44,8 @@ class PostsController < ApplicationController
                     
 	def show
 	  @post = Post.find(params[:id])
-	  
+	  @relates = @post.related.first(3)
+
 	  @f = View.find_by_post_id(@post.id)
 	  if @f != nil
 	  	c = @f.total_view_count + 1
