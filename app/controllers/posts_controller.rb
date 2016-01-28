@@ -44,6 +44,7 @@ class PostsController < ApplicationController
 	def index
 		@posts = Post.order('id DESC').limit(10)
 		@tag = Tag.order('rank DESC')
+		@recents = Post.order('id DESC').limit(2)
 	end
                     
 	def show
@@ -66,6 +67,7 @@ class PostsController < ApplicationController
 	  @tag = Tag.order('rank DESC')
 	  @ptag = Postag.where(post_id:@post.id)
 	  @comments = Comment.where(post_id:@post.id).hash_tree
+	  @recents = Post.order('id DESC').limit(2)
 	end
 
 	def destroy 
