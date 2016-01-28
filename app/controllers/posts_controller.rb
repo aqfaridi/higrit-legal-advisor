@@ -9,6 +9,10 @@ class PostsController < ApplicationController
 
 	def create 
 		@userid = session[:userid]
+		if session.has_key?(:userid) == false
+			redirect_to '/login'
+			return
+		end	
 		@title = params[:posted][:title]
 		@tags = params[:posted][:tags]
 		@cat_id = params[:posted][:category]
